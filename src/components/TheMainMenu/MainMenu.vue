@@ -7,6 +7,13 @@ const emit = defineEmits(['open-search-sidebar'])
 
 const items = ref([
   {
+    label: 'Go Back',
+    icon: 'src/assets/arrow-back.svg',
+    command: () => {
+      router.go(-1)
+    }
+  },
+  {
     label: 'Home',
     icon: 'src/assets/home.svg',
     command: () => {

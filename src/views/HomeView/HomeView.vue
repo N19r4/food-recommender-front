@@ -4,9 +4,8 @@ import CarouselOfRecipes from '@/components/TheCarousel/CarouselOfRecipes.vue'
 </script>
 
 <template>
-  <div>
-    <CarouselOfRecipes />
-  </div>
+  <h2>Welcome to FoodieFinder</h2>
+  <CarouselOfRecipes />
 </template>
 
 <style lang="scss"></style>
