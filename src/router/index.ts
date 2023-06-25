@@ -24,6 +24,11 @@ const router = createRouter({
           path: '/recipe',
           name: 'recipe',
           component: RecipeView
+        },
+        {
+          path: '/search',
+          name: 'search',
+          component: SearchView
         }
       ]
     }

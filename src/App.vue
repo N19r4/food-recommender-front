@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import MainMenu from './components/TheMainMenu/MainMenu.vue'
-import SearchSidebar from '@/components/TheSearchSidebar/SearchSidebar.vue'
 import { ref } from 'vue'
-
-const isSearchSidebarVisible = ref(false)
 </script>
 
 <template>
@@ -12,11 +9,8 @@ const isSearchSidebarVisible = ref(false)
     <RouterView />
   </div>
   <div class="footer">
-    <MainMenu @open-search-sidebar="isSearchSidebarVisible = !isSearchSidebarVisible" />
+    <MainMenu />
   </div>
-  <Transition>
-    <SearchSidebar v-if="isSearchSidebarVisible" />
-  </Transition>
 </template>
 
 <style scoped>

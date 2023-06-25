@@ -6,7 +6,7 @@ import LottieAnimation from 'lottie-web-vue'
 import App from './App.vue'
 import router from './router'
 
-import './assets/app.css'
+import './assets/app.scss'
 import 'primevue/resources/themes/lara-light-indigo/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'

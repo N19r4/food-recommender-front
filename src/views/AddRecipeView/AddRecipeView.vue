@@ -5,7 +5,7 @@ import Button from 'primevue/button'
 import { ref } from 'vue'
 
 const title = ref(null)
-const ingredients = ref([])
+const ingredients = ref(['milk'])
 const steps = ref(1)
 const stepValue = ref(null)
 
@@ -35,22 +35,10 @@ const addStep = () => steps.value++
 
 <style lang="scss">
 .form__container {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  .p-inputtext {
-    max-width: 70vw;
-    border: none;
-    border-bottom: 1px solid #a2a2a2;
-    border-radius: 0;
-    input:focus {
-      outline: none;
-    }
-  }
   .steps__container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 }
 .p-chips .p-chips-multiple-container .p-chips-token {

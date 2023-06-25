@@ -33,7 +33,8 @@ const value = ref(null)
 </script>
 
 <template>
-  <div class="sidebar">
+  <h2>What dou you want to find?</h2>
+  <div class="form__container">
     <Chips v-model="value1" />
   </div>
 </template>
@@ -50,18 +51,7 @@ const value = ref(null)
 //   background-color: #ebb222;
 //   border-radius: 20px;
 // }
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;

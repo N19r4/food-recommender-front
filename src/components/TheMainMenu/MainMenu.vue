@@ -1,11 +1,53 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref, watch, type Ref, onMounted } from 'vue'
 import Dock from 'primevue/dock'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 const emit = defineEmits(['open-search-sidebar'])
+const router = useRouter()
 
-const items = ref([
+type label = 'Go Back' | 'Home' | 'Search' | 'Add Recipe' | 'Save Recipe'
+
+type item = {
+  label: label
+  icon: string
+  command: () => any
+}
+
+type menuConf = {
+  path: string
+  buttons: label[]
+}
+
+const menuConfigurations: menuConf[] = [
+  {
+    path: '/',
+    buttons: ['Search', 'Add Recipe']
+  },
+  {
+    path: '/add-recipe',
+    buttons: ['Go Back', 'Save Recipe']
+  },
+  {
+    path: '/recipe',
+    buttons: ['Go Back', 'Add Recipe']
+  },
+  {
+    path: '/search',
+    buttons: ['Go Back']
+  }
+]
+
+const routeName = computed(() => router.currentRoute.value.fullPath)
+const currentButtonsArray = ref()
+
+watch(routeName, (newVal) => {
+  currentButtonsArray.value = menuConfigurations.find(
+    (conf) => conf.path === newVal.split('?')[0]
+  )?.buttons
+})
+
+const items: Ref<item[]> = ref([
   {
     label: 'Go Back',
     icon: 'src/assets/arrow-back.svg',
@@ -24,14 +66,21 @@ const items = ref([
     label: 'Search',
     icon: 'src/assets/search.svg',
     command: () => {
-      emit('open-search-sidebar')
+      router.push('/search')
     }
   },
   {
-    label: 'Add recipe',
+    label: 'Add Recipe',
     icon: 'src/assets/add.svg',
     command: () => {
       router.push('/add-recipe')
+    }
+  },
+  {
+    label: 'Save Recipe',
+    icon: 'src/assets/bookmark-tick.svg',
+    command: () => {
+      router.push('/')
     }
   }
 ])
@@ -42,6 +91,17 @@ const onDockItemClick = (event: any, item: any) => {
   }
   event.preventDefault()
 }
+
+const checkIfIncludes = (label: any) => {
+  const arr = currentButtonsArray.value
+  if (!arr) {
+    const path = router.currentRoute.value.fullPath
+    currentButtonsArray.value = menuConfigurations.find(
+      (conf) => conf.path === path.split('?')[0]
+    )?.buttons
+  }
+  return currentButtonsArray.value.includes(label)
+}
 </script>
 
 <template>
@@ -49,7 +109,10 @@ const onDockItemClick = (event: any, item: any) => {
     <div class="main-menu__wrapper">
       <Dock :model="items">
         <template #item="slotProps">
-          <div @click="onDockItemClick($event, slotProps.item)">
+          <div
+            v-if="checkIfIncludes(slotProps.item.label)"
+            @click="onDockItemClick($event, slotProps.item)"
+          >
             <img :src="slotProps.item.icon" />
           </div>
         </template>
@@ -61,51 +124,55 @@ const onDockItemClick = (event: any, item: any) => {
 <style lang="scss">
 .main-menu {
   all: initial !important;
-}
-.p-dock {
-  background-color: rgb(255, 206, 81);
-  height: auto;
-}
-.p-dock-item {
-  background-color: rgb(255, 206, 81);
-  border-radius: 100% !important;
-  border: 3px solid white;
-  transition: 0.2s;
-  padding: 10px !important;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .p-menuitem-content,
-  img {
-    width: 30px;
-    height: 30px;
+  .p-dock {
+    background-color: rgb(255, 206, 81);
+    height: auto;
   }
-  &-current {
-    transform: scale(1.4) !important;
-    border: 3.5px solid white;
-    &:hover {
-      cursor: pointer;
-      filter: brightness(110%);
+  .p-dock-item {
+    background-color: rgb(255, 206, 81);
+    border-radius: 100% !important;
+    border: 3px solid white;
+    transition: 0.2s;
+    padding: 10px !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .p-menuitem-content,
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    &-current {
+      transform: scale(1.4) !important;
+      border: 3.5px solid white;
+      &:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+      }
+    }
+    &-prev,
+    &-next {
+      transform: scale(1.1) !important;
     }
   }
-  &-prev,
-  &-next {
-    transform: scale(1.1) !important;
+  .p-dock-list {
+    position: relative;
+    bottom: 20px;
+    gap: 30px;
+    &-container {
+      height: 60px;
+    }
   }
-}
-.p-dock-list {
-  position: relative;
-  bottom: 20px;
-  gap: 30px;
-  &-container {
-    height: 60px;
+  .p-dock.p-dock-top .p-dock-list-container,
+  .p-dock.p-dock-bottom .p-dock-list-container {
+    overflow: visible !important;
   }
-}
-.p-dock.p-dock-top .p-dock-list-container,
-.p-dock.p-dock-bottom .p-dock-list-container {
-  overflow: visible !important;
+  li:not(:has(.p-menuitem-content div)) {
+    display: none;
+  }
 }
 </style>
