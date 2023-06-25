@@ -7,6 +7,13 @@ const emit = defineEmits(['open-search-sidebar'])
 
 const items = ref([
   {
+    label: 'Home',
+    icon: 'src/assets/home.svg',
+    command: () => {
+      router.push('/')
+    }
+  },
+  {
     label: 'Search',
     icon: 'src/assets/search.svg',
     command: () => {
@@ -17,7 +24,7 @@ const items = ref([
     label: 'Add recipe',
     icon: 'src/assets/add.svg',
     command: () => {
-      router.push('/add-new-recipe')
+      router.push('/add-recipe')
     }
   }
 ])
@@ -45,16 +52,19 @@ const onDockItemClick = (event: any, item: any) => {
 </template>
 
 <style lang="scss">
+.main-menu {
+  all: initial !important;
+}
 .p-dock {
   background-color: rgb(255, 206, 81);
   height: auto;
 }
 .p-dock-item {
   background-color: rgb(255, 206, 81);
-  border-radius: 100%;
+  border-radius: 100% !important;
   border: 3px solid white;
   transition: 0.2s;
-  padding: 10px;
+  padding: 10px !important;
 
   display: flex;
   flex-direction: column;
@@ -67,7 +77,7 @@ const onDockItemClick = (event: any, item: any) => {
     height: 30px;
   }
   &-current {
-    transform: scale(1.4);
+    transform: scale(1.4) !important;
     border: 3.5px solid white;
     &:hover {
       cursor: pointer;
@@ -76,7 +86,7 @@ const onDockItemClick = (event: any, item: any) => {
   }
   &-prev,
   &-next {
-    transform: scale(1.1);
+    transform: scale(1.1) !important;
   }
 }
 .p-dock-list {
@@ -86,5 +96,9 @@ const onDockItemClick = (event: any, item: any) => {
   &-container {
     height: 60px;
   }
+}
+.p-dock.p-dock-top .p-dock-list-container,
+.p-dock.p-dock-bottom .p-dock-list-container {
+  overflow: visible !important;
 }
 </style>

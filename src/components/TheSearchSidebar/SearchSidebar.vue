@@ -39,17 +39,17 @@ const value = ref(null)
 </template>
 
 <style lang="scss">
-.p-chips {
-  border-radius: 27px;
-  border: 1px solid #ebb222;
-  width: 18rem;
-  height: 3rem;
-}
-.p-chips-token {
-  padding: 5px;
-  background-color: #ebb222;
-  border-radius: 20px;
-}
+// .p-chips {
+//   border-radius: 27px;
+//   border: 1px solid #ebb222;
+//   width: 18rem;
+//   height: 3rem;
+// }
+// .p-chips-token {
+//   padding: 5px;
+//   background-color: #ebb222;
+//   border-radius: 20px;
+// }
 .sidebar {
   position: fixed;
   top: 0;
