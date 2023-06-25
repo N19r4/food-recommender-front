@@ -69,6 +69,10 @@ const onDockItemClick = (event: any, item: any) => {
   &-current {
     transform: scale(1.4);
     border: 3.5px solid white;
+    &:hover {
+      cursor: pointer;
+      filter: brightness(110%);
+    }
   }
   &-prev,
   &-next {

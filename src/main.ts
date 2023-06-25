@@ -7,6 +7,8 @@ import App from './App.vue'
 import router from './router'
 
 import './assets/app.css'
+// import 'primevue/resources/themes/lara-light-indigo/theme.css'
+// import 'primevue/resources/primevue.min.css'
 
 const app = createApp(App)
 

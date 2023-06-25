@@ -7,7 +7,7 @@
 .main {
   min-height: 100vh;
 }
-footer {
+.footer {
   z-index: 1000;
   margin: 0;
   padding: 0;
@@ -16,7 +16,7 @@ footer {
   left: 0;
 
   transform: translateY(-100%);
-  width: 100vw;
+  /* width: 100vw; */
 }
 
 /* a,
