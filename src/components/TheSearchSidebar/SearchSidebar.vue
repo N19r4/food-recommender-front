@@ -3,6 +3,7 @@ import InputText from 'primevue/inputtext'
 import { ref } from 'vue'
 import Chips from 'primevue/chips'
 
+const value1 = ref()
 // import { useToast } from 'primevue/usetoast'
 // import { useField, useForm } from 'vee-validate'
 
@@ -33,7 +34,7 @@ const value = ref(null)
 
 <template>
   <div class="sidebar">
-    <Chips v-model="value" />
+    <Chips v-model="value1" />
   </div>
 </template>
 
@@ -53,7 +54,6 @@ const value = ref(null)
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9;
   background-color: white;
   width: 100%;
   height: 100%;
