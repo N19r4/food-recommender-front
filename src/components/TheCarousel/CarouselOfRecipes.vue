@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { RecipesData } from './data/recipesData'
-import Carousel from 'primevue/carousel'
-import Button from 'primevue/button'
-import Tag from 'primevue/tag'
 import router from '@/router'
 
 onMounted(() => {

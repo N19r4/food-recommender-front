@@ -20,7 +20,7 @@ const addStep = () => steps.value++
       <label for="username">recipe title</label>
     </span>
     <span class="p-float-label">
-      <Chips id="chips" v-model="ingredients" separator="," />
+      <Chips id="chips" v-model="ingredients" separator=" " />
       <label for="chips">ingredients</label>
     </span>
     <div class="steps__container">
@@ -33,25 +33,4 @@ const addStep = () => steps.value++
   </div>
 </template>
 
-<style lang="scss">
-.form__container {
-  .steps__container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-.p-chips .p-chips-multiple-container .p-chips-token {
-  background-color: rgb(255, 206, 81) !important;
-  padding: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
-}
-.p-button.p-button-outlined {
-  color: rgb(255, 206, 81) !important;
-}
-.p-button.p-button-rounded {
-  width: 1.5rem !important;
-  height: 1.5rem !important;
-  padding: 0;
-}
-</style>
+<style lang="scss" scoped></style>
