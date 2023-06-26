@@ -22,7 +22,7 @@ type menuConf = {
 const menuConfigurations: menuConf[] = [
   {
     path: '/',
-    buttons: ['Search', 'Add Recipe']
+    buttons: ['Add Recipe', 'Search']
   },
   {
     path: '/add-recipe',
@@ -30,11 +30,15 @@ const menuConfigurations: menuConf[] = [
   },
   {
     path: '/recipe',
-    buttons: ['Go Back', 'Add Recipe']
+    buttons: ['Add Recipe', 'Go Back']
   },
   {
     path: '/search',
     buttons: ['Go Back']
+  },
+  {
+    path: '/search-result',
+    buttons: ['Home', 'Add Recipe', 'Search']
   }
 ]
 

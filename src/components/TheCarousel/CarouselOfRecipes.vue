@@ -98,14 +98,14 @@ const goToRecipe = (recipeId: number) => {
 
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 20px 27px 2px rgba(222, 222, 222, 0.75);
+    box-shadow: 0px 20px 27px 2px rgba(119, 119, 119, 0.75);
   }
 
   padding: 2rem;
   width: 18.90363rem;
   border-radius: 22px;
   background: #fff;
-  box-shadow: 0px 10px 10px 2px rgba(222, 222, 222, 0.5);
+  box-shadow: 0px 10px 10px 2px rgba(119, 119, 119, 0.436);
   transition: 0.5s;
 
   &__image {

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { HomeView, SearchView, RecipeView, AddRecipeView } from '@/views'
+import { HomeView, SearchView, RecipeView, AddRecipeView, SearchResultView } from '@/views'
 import ViewWrapper from '@/components/common/ViewWrapper.vue'
 
 const router = createRouter({
@@ -29,6 +29,11 @@ const router = createRouter({
           path: '/search',
           name: 'search',
           component: SearchView
+        },
+        {
+          path: '/search-result',
+          name: 'search result',
+          component: SearchResultView
         }
       ]
     }

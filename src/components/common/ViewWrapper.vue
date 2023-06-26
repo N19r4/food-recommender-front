@@ -1,13 +1,13 @@
 <script setup lang="ts"></script>
 <template>
   <div class="wrapper">
-    <router-view v-slot="{ Component }">
-      <transition name="fade">
-        <div class="main__wrapper">
+    <div class="main__wrapper">
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
           <component :is="Component" />
-        </div>
-      </transition>
-    </router-view>
+        </transition>
+      </router-view>
+    </div>
   </div>
 </template>
 
