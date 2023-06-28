@@ -42,11 +42,11 @@ const menuConfigurations: menuConf[] = [
   },
   {
     path: '/recipe',
-    buttons: ['Add Recipe', 'Go Back']
+    buttons: ['Add Recipe', 'Home']
   },
   {
     path: '/owned-recipe',
-    buttons: ['Add Recipe', 'Go Back', 'Edit Recipe']
+    buttons: ['Add Recipe', 'Home', 'Edit Recipe']
   },
   {
     path: '/search',

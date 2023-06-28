@@ -27,6 +27,7 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
       v-for="{ id, imageURL, title, courses, cuisines, isOwned } in recipes"
       @click="goToRecipe(id, isOwned)"
     >
+      <div v-if="isOwned" class="recipe__owned-marker"></div>
       <div class="recipe__image" :style="`background-image: url(${imageURL});`">
         <div class="recipe__image__overlay">
           <span class="recipe__title">{{ title }}</span>
@@ -52,6 +53,7 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
 
   .recipe {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
@@ -63,6 +65,19 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
 
     border-radius: 22px;
     transition: 0.5s;
+
+    &__owned-marker {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 4rem 4rem 0;
+      border-color: transparent #097e2a transparent transparent;
+      border-top-right-radius: 22px;
+    }
 
     &__image {
       width: 14.55581rem;
