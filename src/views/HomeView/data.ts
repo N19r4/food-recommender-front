@@ -19,7 +19,7 @@ export const sections: BasicRecipe[][] = [
         'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80',
       courses: ['lunch', 'breakfast'],
       isFavourite: false,
-      isOwned: false
+      isOwned: true
     },
     {
       id: 3,

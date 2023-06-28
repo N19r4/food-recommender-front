@@ -27,7 +27,7 @@ export const RecipesData = {
           'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80',
         courses: ['lunch', 'breakfast'],
         isFavourite: false,
-        isOwned: false
+        isOwned: true
       },
       {
         id: 3,
@@ -47,7 +47,7 @@ export const RecipesData = {
           'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=481&q=80',
         courses: ['lunch', 'dinner'],
         isFavourite: true,
-        isOwned: false
+        isOwned: true
       },
       {
         id: 5,

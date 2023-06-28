@@ -42,11 +42,12 @@ const getSeverity = (status: any) => {
   }
 }
 
-const goToRecipe = (recipeId: number) => {
+const goToRecipe = (recipeId: number, isOwned: boolean) => {
   router.push({
     path: '/recipe',
     query: {
-      id: recipeId
+      id: recipeId,
+      editable: isOwned ? '1' : '0'
     }
   })
 }
@@ -74,8 +75,8 @@ const goToRecipe = (recipeId: number) => {
   <div class="carousel__wrapper">
     <div
       class="recipe"
-      v-for="{ id, imageURL, title, description } in recipes"
-      @click="goToRecipe(id)"
+      v-for="{ id, imageURL, title, description, isOwned } in recipes"
+      @click="goToRecipe(id, isOwned)"
     >
       <div class="recipe__image" :style="`background-image: url(${imageURL});`" />
       <div class="recipe__text">

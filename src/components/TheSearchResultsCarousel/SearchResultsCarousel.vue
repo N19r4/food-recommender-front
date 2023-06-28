@@ -11,11 +11,12 @@ onMounted(() => {
 
 const recipes = ref()
 
-const goToRecipe = (recipeId: number) => {
+const goToRecipe = (recipeId: number, isOwned: boolean) => {
   router.push({
     path: '/recipe',
     query: {
-      id: recipeId
+      id: recipeId,
+      editable: isOwned ? '1' : '0'
     }
   })
 }
@@ -24,8 +25,8 @@ const goToRecipe = (recipeId: number) => {
   <div class="search-results-carousel__wrapper">
     <div
       class="recipe"
-      v-for="{ id, imageURL, title, courses, cuisines } in recipes"
-      @click="goToRecipe(id)"
+      v-for="{ id, imageURL, title, courses, cuisines, isOwned } in recipes"
+      @click="goToRecipe(id, isOwned)"
     >
       <div class="recipe__image" :style="`background-image: url(${imageURL});`">
         <div class="recipe__image__overlay">

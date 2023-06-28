@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { HomeView, SearchView, RecipeView, AddRecipeView, SearchResultView } from '@/views'
+import {
+  HomeView,
+  SearchView,
+  RecipeView,
+  AddRecipeView,
+  SearchResultView,
+  EditRecipeView
+} from '@/views'
 import ViewWrapper from '@/components/common/ViewWrapper.vue'
 
 const router = createRouter({
@@ -19,6 +26,11 @@ const router = createRouter({
           path: '/add-recipe',
           name: 'add recipe',
           component: AddRecipeView
+        },
+        {
+          path: '/edit-recipe',
+          name: 'edit recipe',
+          component: EditRecipeView
         },
         {
           path: '/recipe',

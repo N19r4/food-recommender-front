@@ -29,6 +29,10 @@ const menuConfigurations: menuConf[] = [
     buttons: ['Go Back', 'Save Recipe']
   },
   {
+    path: '/edit-recipe',
+    buttons: ['Go Back', 'Save Recipe']
+  },
+  {
     path: '/recipe',
     buttons: ['Add Recipe', 'Go Back', 'Edit Recipe']
   },
@@ -91,7 +95,7 @@ const items: Ref<item[]> = ref([
     label: 'Edit Recipe',
     icon: 'src/assets/edit.svg',
     command: () => {
-      router.push('/')
+      router.push('/edit-recipe')
     }
   }
 ])
