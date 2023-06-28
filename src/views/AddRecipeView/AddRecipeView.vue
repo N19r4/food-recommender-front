@@ -27,13 +27,14 @@ const removeStep = (stepID: number) => {
   <div class="form__container">
     <span class="p-float-label">
       <InputText id="username" v-model="title" />
-      <label for="username">recipe title</label>
+      <label for="username">Recipe title</label>
     </span>
     <span class="p-float-label">
       <Chips id="chips" v-model="ingredients" separator=" " />
-      <label for="chips">ingredients</label>
+      <label for="chips">Ingredients</label>
     </span>
     <div class="steps__container">
+      <label>Steps</label>
       <span v-for="(step, index) in stepsValues" :key="index" class="step">
         <Button
           icon="pi pi-minus"
@@ -67,7 +68,7 @@ const removeStep = (stepID: number) => {
     </div>
     <span class="p-float-label">
       <Chips id="chips" v-model="tags" separator=" " />
-      <label for="chips">tags</label>
+      <label for="chips">Tags</label>
     </span>
   </div>
 </template>

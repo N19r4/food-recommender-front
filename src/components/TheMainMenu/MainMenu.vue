@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { computed, ref, watch, type Ref, onMounted } from 'vue'
 import Dock from 'primevue/dock'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
-const emit = defineEmits(['open-search-sidebar'])
 const router = useRouter()
+const route = useRoute()
 
-type label = 'Go Back' | 'Home' | 'Search' | 'Add Recipe' | 'Save Recipe' | 'Edit Recipe'
+type label =
+  | 'Go Back'
+  | 'Home'
+  | 'Search'
+  | 'Add Recipe'
+  | 'Save Added Recipe'
+  | 'Save Edited Recipe'
+  | 'Edit Recipe'
+  | 'Discard Changes'
 
 type item = {
   label: label
@@ -26,11 +34,11 @@ const menuConfigurations: menuConf[] = [
   },
   {
     path: '/add-recipe',
-    buttons: ['Go Back', 'Save Recipe']
+    buttons: ['Go Back', 'Save Added Recipe']
   },
   {
     path: '/edit-recipe',
-    buttons: ['Go Back', 'Save Recipe']
+    buttons: ['Discard Changes', 'Save Edited Recipe']
   },
   {
     path: '/recipe',
@@ -54,6 +62,16 @@ watch(routeName, (newVal) => {
     (conf) => conf.path === newVal.split('?')[0]
   )?.buttons
 })
+
+const goBackToRecipe = () => {
+  router.push({
+    path: '/recipe',
+    query: {
+      id: route.query.id,
+      editable: route.query.editable ? '1' : '0'
+    }
+  })
+}
 
 const items: Ref<item[]> = ref([
   {
@@ -85,17 +103,44 @@ const items: Ref<item[]> = ref([
     }
   },
   {
-    label: 'Save Recipe',
+    label: 'Save Added Recipe',
     icon: 'src/assets/bookmark-tick.svg',
     command: () => {
-      router.push('/')
+      // new id should be taken from database
+      router.push({
+        path: '/recipe',
+        query: {
+          id: Math.floor(Math.random() * 100),
+          editable: route.query.editable ? '1' : '0'
+        }
+      })
+    }
+  },
+  {
+    label: 'Save Edited Recipe',
+    icon: 'src/assets/bookmark-tick.svg',
+    command: () => {
+      goBackToRecipe()
     }
   },
   {
     label: 'Edit Recipe',
     icon: 'src/assets/edit.svg',
     command: () => {
-      router.push('/edit-recipe')
+      router.push({
+        path: '/edit-recipe',
+        query: {
+          id: route.query.id,
+          editable: route.query.editable ? '1' : '0'
+        }
+      })
+    }
+  },
+  {
+    label: 'Discard Changes',
+    icon: 'src/assets/delete.svg',
+    command: () => {
+      router.go(-1)
     }
   }
 ])
@@ -191,6 +236,9 @@ const checkIfIncludes = (label: any) => {
   }
   li[aria-label='Edit Recipe'] {
     background-color: #097e2a !important;
+  }
+  li[aria-label='Discard Changes'] {
+    background-color: #c11818 !important;
   }
 }
 </style>

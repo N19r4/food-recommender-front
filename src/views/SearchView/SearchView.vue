@@ -30,13 +30,7 @@ const selectedKeywords = ref(['pizza'])
 //   }
 // })
 
-const recommendedKeywords = ref([
-  { name: 'asian', isActive: false },
-  { name: 'ramen', isActive: false },
-  { name: 'noodles', isActive: false },
-  { name: 'eggs', isActive: false },
-  { name: 'vegetarian', isActive: false }
-])
+const recommendedKeywords = ref(['asian', 'ramen', 'noodles', 'eggs', 'vegetarian'])
 
 const addKeyword = (keywordName: string) => {
   if (selectedKeywords.value.includes(keywordName))
@@ -49,9 +43,13 @@ const goToSearchResult = () => {
   router.push({
     path: '/search-result',
     query: {
-      keywords: selectedKeywords.value.join('&')
+      keywords: selectedKeywords.value
     }
   })
+}
+
+const changeKeywordFocus = (e: any) => {
+  e.target.classList.toggle('active')
 }
 </script>
 
@@ -62,10 +60,10 @@ const goToSearchResult = () => {
   </div>
   <div class="recommended-keywords__container">
     <span
-      v-for="({ name }, index) in recommendedKeywords"
+      v-for="(name, index) in recommendedKeywords"
       :key="index"
       class="recommended-keywords__container__tag"
-      @click="addKeyword(name)"
+      @click="addKeyword(name), changeKeywordFocus($event)"
       >{{ name }}</span
     >
   </div>
@@ -95,16 +93,15 @@ const goToSearchResult = () => {
 
     transition: 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 
-    .active {
-      color: white;
-      background-color: #ebb222;
-    }
-
     &:hover {
       color: white;
       background-color: #ebb222;
       cursor: pointer;
     }
+  }
+  .active {
+    color: white !important;
+    background-color: #ebb222 !important;
   }
 }
 .search-button {
