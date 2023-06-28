@@ -13,10 +13,9 @@ const recipes = ref()
 
 const goToRecipe = (recipeId: number, isOwned: boolean) => {
   router.push({
-    path: '/recipe',
+    path: isOwned ? '/owned-recipe' : '/recipe',
     query: {
-      id: recipeId,
-      editable: isOwned ? '1' : '0'
+      id: recipeId
     }
   })
 }

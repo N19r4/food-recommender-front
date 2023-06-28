@@ -42,6 +42,10 @@ const menuConfigurations: menuConf[] = [
   },
   {
     path: '/recipe',
+    buttons: ['Add Recipe', 'Go Back']
+  },
+  {
+    path: '/owned-recipe',
     buttons: ['Add Recipe', 'Go Back', 'Edit Recipe']
   },
   {
@@ -62,16 +66,6 @@ watch(routeName, (newVal) => {
     (conf) => conf.path === newVal.split('?')[0]
   )?.buttons
 })
-
-const goBackToRecipe = () => {
-  router.push({
-    path: '/recipe',
-    query: {
-      id: route.query.id,
-      editable: route.query.editable ? '1' : '0'
-    }
-  })
-}
 
 const items: Ref<item[]> = ref([
   {
@@ -108,10 +102,9 @@ const items: Ref<item[]> = ref([
     command: () => {
       // new id should be taken from database
       router.push({
-        path: '/recipe',
+        path: '/owned-recipe',
         query: {
-          id: Math.floor(Math.random() * 100),
-          editable: route.query.editable ? '1' : '0'
+          id: Math.floor(Math.random() * 100)
         }
       })
     }
@@ -120,7 +113,12 @@ const items: Ref<item[]> = ref([
     label: 'Save Edited Recipe',
     icon: 'src/assets/bookmark-tick.svg',
     command: () => {
-      goBackToRecipe()
+      router.push({
+        path: '/owned-recipe',
+        query: {
+          id: route.query.id
+        }
+      })
     }
   },
   {
@@ -130,8 +128,7 @@ const items: Ref<item[]> = ref([
       router.push({
         path: '/edit-recipe',
         query: {
-          id: route.query.id,
-          editable: route.query.editable ? '1' : '0'
+          id: route.query.id
         }
       })
     }
