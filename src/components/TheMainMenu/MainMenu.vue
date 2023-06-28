@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 const emit = defineEmits(['open-search-sidebar'])
 const router = useRouter()
 
-type label = 'Go Back' | 'Home' | 'Search' | 'Add Recipe' | 'Save Recipe'
+type label = 'Go Back' | 'Home' | 'Search' | 'Add Recipe' | 'Save Recipe' | 'Edit Recipe'
 
 type item = {
   label: label
@@ -30,7 +30,7 @@ const menuConfigurations: menuConf[] = [
   },
   {
     path: '/recipe',
-    buttons: ['Add Recipe', 'Go Back']
+    buttons: ['Add Recipe', 'Go Back', 'Edit Recipe']
   },
   {
     path: '/search',
@@ -83,6 +83,13 @@ const items: Ref<item[]> = ref([
   {
     label: 'Save Recipe',
     icon: 'src/assets/bookmark-tick.svg',
+    command: () => {
+      router.push('/')
+    }
+  },
+  {
+    label: 'Edit Recipe',
+    icon: 'src/assets/edit.svg',
     command: () => {
       router.push('/')
     }
@@ -177,6 +184,9 @@ const checkIfIncludes = (label: any) => {
   }
   li:not(:has(.p-menuitem-content div)) {
     display: none;
+  }
+  li[aria-label='Edit Recipe'] {
+    background-color: #097e2a !important;
   }
 }
 </style>

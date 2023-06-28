@@ -45,6 +45,7 @@ const addKeyword = (keywordName: string) => {
 }
 
 const goToSearchResult = () => {
+  if (selectedKeywords.value.length <= 0) return
   router.push({
     path: '/search-result',
     query: {

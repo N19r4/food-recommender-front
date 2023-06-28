@@ -6,10 +6,13 @@ import { ref } from 'vue'
 
 const title = ref(null)
 const ingredients = ref(['milk'])
-const steps = ref(1)
-const stepValue = ref(null)
+const stepsValues = ref(['Write something here!', 'Add something!'])
 
-const addStep = () => steps.value++
+const addStep = () => stepsValues.value.push('')
+
+const removeStep = (stepID: number) => {
+  stepsValues.value.splice(stepID, 1)
+}
 </script>
 
 <template>
@@ -24,12 +27,19 @@ const addStep = () => steps.value++
       <label for="chips">ingredients</label>
     </span>
     <div class="steps__container">
-      <span v-for="(step, index) in steps">
-        <InputText :id="`step${index}`" v-model="stepValue" :placeholder="`step ${index + 1}`" />
+      <span v-for="(step, index) in stepsValues" :key="index">
+        <Button
+          icon="pi pi-minus"
+          outlined
+          rounded
+          aria-label="Remove"
+          @click="removeStep(index)"
+        />
+        <span>{{ `${index + 1}. ${step}` }}</span>
+
+        <!-- <InputText :id="`step${index}`" :placeholder="`step ${index + 1}`" /> -->
       </span>
     </div>
-
-    <Button icon="pi pi-plus" outlined rounded aria-label="Add" @click="addStep" />
   </div>
 </template>
 
