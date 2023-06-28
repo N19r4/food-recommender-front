@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { RecipesData } from './data/recipesData'
+import { RecipesData } from '@/views/database'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
