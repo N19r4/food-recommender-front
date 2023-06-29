@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import CarouselOfRecipes from '@/components/TheCarousel/CarouselOfRecipes.vue'
+
+// name should be taken from api
 </script>
 
 <template>
   <div>
-    <h2>Welcome to FoodieFinder</h2>
+    <h2>Welcome back {{ `cukinia` }}!</h2>
     <CarouselOfRecipes />
   </div>
 </template>

@@ -21,7 +21,7 @@ const updateUserID = () => {
 
 <template>
   <div>
-    <h2>Welcome back!</h2>
+    <h2>Welcome to FoodieFinder</h2>
     <span class="p-float-label">
       <InputText id="username" v-model="nick" :class="nick ?? `p-invalid`" />
       <label for="username">Username</label>
