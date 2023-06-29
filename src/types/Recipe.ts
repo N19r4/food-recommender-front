@@ -2,7 +2,7 @@ export interface BasicRecipe {
   id: number
   title: string
   description: string
-  courses: string[]
+  tags: string[]
   imageURL: string
   isFavourite: any
   isOwned: boolean

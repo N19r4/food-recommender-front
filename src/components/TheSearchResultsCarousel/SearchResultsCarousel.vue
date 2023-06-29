@@ -24,7 +24,7 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
   <div class="search-results-carousel__wrapper">
     <div
       class="recipe"
-      v-for="{ id, imageURL, title, courses, cuisines, isOwned } in recipes"
+      v-for="{ id, imageURL, title, tags, cuisines, isOwned } in recipes"
       @click="goToRecipe(id, isOwned)"
     >
       <div v-if="isOwned" class="recipe__owned-marker"></div>
@@ -32,8 +32,8 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
         <div class="recipe__image__overlay">
           <span class="recipe__title">{{ title }}</span>
           <div class="recipe__tags">
-            <div class="recipe__tags__courses">
-              <span v-for="course in courses">#{{ course }} </span>
+            <div class="recipe__tags__tags">
+              <span v-for="tag in tags">#{{ tag }} </span>
             </div>
             <div class="recipe__tags__cuisines">
               <span v-for="cuisine in cuisines">#{{ cuisine }} </span>
@@ -111,7 +111,7 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
       display: flex;
       flex-direction: column;
       &__cuisines,
-      &__courses {
+      &__tags {
         color: #fff;
         font-size: 0.8rem;
         display: flex;

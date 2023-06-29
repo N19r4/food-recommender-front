@@ -66,7 +66,7 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
         <div>
           <h4 class="mb-1">{{ slotProps.data.title }}</h4>
           <h6 class="mt-0 mb-3">{{ slotProps.data.description }}</h6>
-          <Tag v-for="course in slotProps.data.courses" :value="course" />
+          <Tag v-for="tag in slotProps.data.tags" :value="tag" />
         </div>
       </div>
     </template>

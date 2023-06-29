@@ -1,11 +1,21 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { RecipesData } from '../database'
+import RecipeForm from '@/components/TheRecipeForm/RecipeForm.vue'
 
 const route = useRoute()
+const recipe = ref()
+
+onMounted(() => {
+  recipe.value = RecipesData.getProductsData().find(
+    ({ id }) => id == (route.query.id as unknown as number)
+  )
+})
 </script>
 
 <template>
   <div>
-    <h2>Recipe {{ route.query.id }}</h2>
+    <RecipeForm v-if="recipe" :title="`Edit ${recipe.title} recipe`" />
   </div>
 </template>

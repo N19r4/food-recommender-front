@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import loader from '@/assets/hot-food.json'
+import { LottieAnimation } from 'lottie-web-vue'
 </script>
 
 <template>

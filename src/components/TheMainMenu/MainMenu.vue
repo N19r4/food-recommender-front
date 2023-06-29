@@ -14,8 +14,8 @@ type label =
   | 'Save Added Recipe'
   | 'Save Edited Recipe'
   | 'Edit Recipe'
+  | 'Delete Recipe'
   | 'Discard Changes'
-  | 'Undo'
 
 type item = {
   label: label
@@ -43,7 +43,7 @@ const menuConfigurations: menuConf[] = [
   },
   {
     path: '/edit-recipe',
-    buttons: ['Discard Changes', 'Undo', 'Save Edited Recipe']
+    buttons: ['Delete Recipe', 'Discard Changes', 'Save Edited Recipe']
   },
   {
     path: '/recipe',
@@ -118,6 +118,7 @@ const items: Ref<item[]> = ref([
     label: 'Save Edited Recipe',
     icon: 'src/assets/bookmark-tick.svg',
     command: () => {
+      alert('Recipe saved.')
       router.push({
         path: '/owned-recipe',
         query: {
@@ -139,14 +140,15 @@ const items: Ref<item[]> = ref([
     }
   },
   {
-    label: 'Discard Changes',
+    label: 'Delete Recipe',
     icon: 'src/assets/delete.svg',
     command: () => {
-      router.go(-1)
+      alert('Recipe deleted.')
+      router.push('/')
     }
   },
   {
-    label: 'Undo',
+    label: 'Discard Changes',
     icon: 'src/assets/undo.svg',
     command: () => {
       router.push({
@@ -251,7 +253,7 @@ const checkIfIncludes = (label: any) => {
   li[aria-label='Edit Recipe'] {
     background-color: #097e2a !important;
   }
-  li[aria-label='Discard Changes'] {
+  li[aria-label='Delete Recipe'] {
     background-color: #c11818 !important;
   }
 }
