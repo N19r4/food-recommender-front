@@ -5,13 +5,27 @@ import {
   RecipeView,
   AddRecipeView,
   SearchResultView,
-  EditRecipeView
+  EditRecipeView,
+  LoginView
 } from '@/views'
 import ViewWrapper from '@/components/common/ViewWrapper.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: ViewWrapper,
+      children: [
+        {
+          path: '',
+          name: 'login',
+          component: LoginView
+        }
+      ]
+    },
+
     {
       path: '/',
       name: 'home',

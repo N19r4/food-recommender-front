@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, type Ref, onMounted } from 'vue'
+import { computed, ref, watch, type Ref } from 'vue'
 import Dock from 'primevue/dock'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -15,6 +15,7 @@ type label =
   | 'Save Edited Recipe'
   | 'Edit Recipe'
   | 'Discard Changes'
+  | 'Undo'
 
 type item = {
   label: label
@@ -29,6 +30,10 @@ type menuConf = {
 
 const menuConfigurations: menuConf[] = [
   {
+    path: '/login',
+    buttons: []
+  },
+  {
     path: '/',
     buttons: ['Add Recipe', 'Search']
   },
@@ -38,7 +43,7 @@ const menuConfigurations: menuConf[] = [
   },
   {
     path: '/edit-recipe',
-    buttons: ['Discard Changes', 'Save Edited Recipe']
+    buttons: ['Discard Changes', 'Undo', 'Save Edited Recipe']
   },
   {
     path: '/recipe',
@@ -138,6 +143,18 @@ const items: Ref<item[]> = ref([
     icon: 'src/assets/delete.svg',
     command: () => {
       router.go(-1)
+    }
+  },
+  {
+    label: 'Undo',
+    icon: 'src/assets/undo.svg',
+    command: () => {
+      router.push({
+        path: '/owned-recipe',
+        query: {
+          id: route.query.id
+        }
+      })
     }
   }
 ])

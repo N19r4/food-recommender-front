@@ -1,14 +1,28 @@
 <script setup lang="ts">
+import { app } from '@/main'
+import router from '@/router'
+import { computed, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import MainMenu from './components/TheMainMenu/MainMenu.vue'
-import { ref } from 'vue'
+
+const showFooter = ref()
+
+const routeName = computed(() => router.currentRoute.value.fullPath)
+
+watch(routeName, () => {
+  getPath()
+})
+
+const getPath = () => {
+  showFooter.value = routeName.value !== '/login'
+}
 </script>
 
 <template>
   <div class="main">
     <RouterView />
   </div>
-  <div class="footer">
+  <div class="footer" v-if="showFooter">
     <MainMenu />
   </div>
 </template>

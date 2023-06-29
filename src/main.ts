@@ -11,7 +11,9 @@ import 'primevue/resources/themes/lara-light-indigo/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 
-const app = createApp(App)
+export const app = createApp(App)
+
+app.config.globalProperties.userID = -1
 
 app.use(createPinia())
 app.use(router)

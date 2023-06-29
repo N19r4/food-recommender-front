@@ -55,16 +55,14 @@ const removeStep = (stepID: number) => {
       />
     </div>
     <div class="additional-info">
-      <span>
-        <label for="prep-time">Prep Time</label>
-        <InputNumber
-          input-id="prep-time"
-          v-model="enteredPrepTime"
-          :min="0"
-          :max="600"
-          suffix=" mins"
-        />
-      </span>
+      <label for="prep-time">Prep Time</label>
+      <InputNumber
+        input-id="prep-time"
+        v-model="enteredPrepTime"
+        :min="0"
+        :max="600"
+        suffix=" mins"
+      />
     </div>
     <span class="p-float-label">
       <Chips id="chips" v-model="tags" separator=" " />
