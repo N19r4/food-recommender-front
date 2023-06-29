@@ -13,7 +13,7 @@ import 'primeicons/primeicons.css'
 
 export const app = createApp(App)
 
-app.config.globalProperties.userID = -1
+app.config.globalProperties.userID = 1 // should be stored somewhere else - after site reload there is no access
 
 app.use(createPinia())
 app.use(router)
