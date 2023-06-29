@@ -23,7 +23,7 @@ $YELLOW: rgb(255, 206, 81);
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.2s ease;
 }
 
 .fade-enter-from,
@@ -41,7 +41,7 @@ $YELLOW: rgb(255, 206, 81);
   transform: translateY(100px);
 }
 
-.main__wrapper {
+.main__wrapper > div {
   display: flex;
   flex-direction: column;
   align-items: center;

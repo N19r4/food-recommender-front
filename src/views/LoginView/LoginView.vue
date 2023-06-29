@@ -20,28 +20,30 @@ const updateUserID = () => {
 </script>
 
 <template>
-  <h2>Welcome back!</h2>
-  <span class="p-float-label">
-    <InputText id="username" v-model="nick" :class="nick ?? `p-invalid`" />
-    <label for="username">Username</label>
-  </span>
-  <span class="p-float-label">
-    <Password
-      id="password"
-      v-model="password"
-      :class="password ?? `p-invalid`"
-      toggleMask
-      :feedback="false"
+  <div>
+    <h2>Welcome back!</h2>
+    <span class="p-float-label">
+      <InputText id="username" v-model="nick" :class="nick ?? `p-invalid`" />
+      <label for="username">Username</label>
+    </span>
+    <span class="p-float-label">
+      <Password
+        id="password"
+        v-model="password"
+        :class="password ?? `p-invalid`"
+        toggleMask
+        :feedback="false"
+      />
+      <label for="password">Password</label>
+    </span>
+    <Button
+      class="go-button"
+      icon="pi pi-arrow-right"
+      rounded
+      aria-label="Arrow right"
+      @click="updateUserID"
     />
-    <label for="password">Password</label>
-  </span>
-  <Button
-    class="go-button"
-    icon="pi pi-arrow-right"
-    rounded
-    aria-label="Arrow right"
-    @click="updateUserID"
-  />
+  </div>
 </template>
 
 <style scoped lang="scss">

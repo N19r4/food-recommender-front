@@ -54,26 +54,28 @@ const changeKeywordFocus = (e: any) => {
 </script>
 
 <template>
-  <h2>What dou you want to find?</h2>
-  <div class="form__container">
-    <Chips id="chips" v-model="selectedKeywords" separator=" " :allowDuplicate="false" />
+  <div>
+    <h2>What dou you want to find?</h2>
+    <div class="form__container">
+      <Chips id="chips" v-model="selectedKeywords" separator=" " :allowDuplicate="false" />
+    </div>
+    <div class="recommended-keywords__container">
+      <span
+        v-for="(name, index) in recommendedKeywords"
+        :key="index"
+        class="recommended-keywords__container__tag"
+        @click="addKeyword(name), changeKeywordFocus($event)"
+        >{{ name }}</span
+      >
+    </div>
+    <Button
+      icon="pi pi-search"
+      rounded
+      aria-label="Search"
+      class="search-button"
+      @click="goToSearchResult"
+    />
   </div>
-  <div class="recommended-keywords__container">
-    <span
-      v-for="(name, index) in recommendedKeywords"
-      :key="index"
-      class="recommended-keywords__container__tag"
-      @click="addKeyword(name), changeKeywordFocus($event)"
-      >{{ name }}</span
-    >
-  </div>
-  <Button
-    icon="pi pi-search"
-    rounded
-    aria-label="Search"
-    class="search-button"
-    @click="goToSearchResult"
-  />
 </template>
 
 <style lang="scss" scoped>

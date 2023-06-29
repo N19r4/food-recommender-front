@@ -5,5 +5,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <h2>Recipe {{ route.query.id }}</h2>
+  <div>
+    <h2>Recipe {{ route.query.id }}</h2>
+  </div>
 </template>
