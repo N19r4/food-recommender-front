@@ -13,7 +13,7 @@
 
 <style lang="scss">
 .wrapper {
-  margin: 40px 0;
+  margin: 0 0 40px 0;
   background-color: rgb(255, 255, 255);
   border-top: 1px solid #e6e4d9;
   display: flex;

@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { RecipesData } from '../database'
-import { onMounted, ref } from 'vue'
-import Loader from '@/components/common/Loader.vue'
+import { onMounted, ref, watch } from 'vue'
+import Checkbox from 'primevue/checkbox'
+import ToggleButton from 'primevue/togglebutton'
 
 const route = useRoute()
 const recipe = ref()
+const checkedIngredients = ref([])
+const isLiked = ref(false)
 
 onMounted(() => {
   recipe.value = RecipesData.getProductsData().find(
     ({ id }) => id == (route.query.id as unknown as number)
   )
+  if (typeof recipe.value.isFavourite !== undefined) isLiked.value = recipe.value.isFavourite
 })
 </script>
 
@@ -18,6 +22,7 @@ onMounted(() => {
   <div>
     <div class="recipe" v-if="recipe">
       <div v-if="recipe.isOwned" class="recipe__owned-marker"></div>
+
       <div class="recipe__image" :style="`background-image: url(${recipe.imageURL});`">
         <div class="recipe__image__overlay">
           <span class="recipe__title">{{ recipe.title }}</span>
@@ -31,29 +36,57 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div class="recipe__ingredients-section">
-        <span class="recipe__ingredients-section__title">Ingredients</span>
-        <span v-for="(ingredient, index) in recipe.ingredients">{{
-          `${index + 1}. ${ingredient}`
-        }}</span>
-      </div>
-      <div class="recipe__steps-section">
-        <span class="recipe__steps-section__title">Steps</span>
-        <span v-for="(step, index) in recipe.steps">{{ `${index + 1}. ${step}` }}</span>
+      <ToggleButton
+        v-model="isLiked"
+        class="like-button"
+        onLabel=""
+        offLabel=""
+        onIcon="pi pi-heart-fill"
+        offIcon="pi pi-heart"
+      />
+      <div class="recipe__info">
+        <div class="recipe__ingredients-section">
+          <span class="recipe__ingredients-section__title">Ingredients</span>
+          <div class="recipe__ingredients-section__list">
+            <div v-for="(value, index) in recipe.ingredients" :key="index">
+              <Checkbox
+                v-model="checkedIngredients"
+                :inputId="`ingredient-${index}`"
+                :name="value"
+                :value="value"
+              />
+              <label :for="`ingredient-${index}`"> {{ value }} </label>
+            </div>
+          </div>
+        </div>
+        <div class="recipe__steps-section">
+          <span class="recipe__steps-section__title">Steps</span>
+          <span v-for="(step, index) in recipe.steps">{{ `${index + 1}. ${step}` }}</span>
+        </div>
       </div>
     </div>
-    <Loader v-else />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .recipe {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
   transform: translateY(-5rem);
+
+  .like-button {
+    position: absolute;
+    top: 13rem;
+    right: 4rem;
+    z-index: 3;
+    border-radius: 100%;
+  }
+
+  &__info {
+    position: relative;
+    border-radius: 3rem 3rem 0 0;
+    transform: translateY(-2rem);
+    z-index: 2;
+    background-color: white;
+  }
 
   &__owned-marker {
     position: absolute;
@@ -70,7 +103,7 @@ onMounted(() => {
   &__image {
     min-width: 100vw;
     height: 16.125rem;
-    border-radius: 0 0 40px 40px;
+    // border-radius: 0 0 40px 40px;
     background: #d9d9d9;
     background-position: center;
     background-size: cover;
@@ -83,7 +116,7 @@ onMounted(() => {
       float: right;
       border-radius: inherit;
 
-      padding: 2rem 2rem;
+      padding: 4rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -111,15 +144,26 @@ onMounted(() => {
   &__ingredients-section {
     &__title {
       font-size: 1.5rem;
+      margin-bottom: 1.5rem;
     }
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     width: 100vw;
-    padding: 2rem 3rem;
+    padding: 3rem 3rem;
   }
   &__ingredients-section {
     background-color: rgba(131, 131, 131, 0.07);
+    border-radius: 0 0 3rem 3rem;
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      & > div {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
   }
 }
 </style>

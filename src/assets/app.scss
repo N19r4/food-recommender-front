@@ -80,11 +80,32 @@ h2 {
     gap: 1rem;
   }
 }
-.p-chips .p-chips-multiple-container .p-chips-token {
-  background-color: $YELLOW !important;
-  padding: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
-  font-size: 0.8rem;
+.menu button {
+  background-color: white !important;
+  color: black;
+  box-shadow: none;
+
+  &:hover {
+    color: black !important;
+  }
+  .p-button-label {
+    display: none;
+  }
+  &.p-button {
+    border: none !important;
+  }
+}
+.p-inputwrapper-focus {
+  box-shadow: none !important;
+}
+.p-chips .p-chips-multiple-container {
+  border: none !important;
+  .p-chips-token {
+    background-color: $YELLOW !important;
+    padding: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 0.8rem;
+  }
 }
 .p-button {
   color: white;
@@ -100,4 +121,9 @@ h2 {
   width: 1.75rem !important;
   height: 1.75rem !important;
   padding: 0;
+}
+
+.p-checkbox-box.p-highlight {
+  border-color: $YELLOW !important;
+  background-color: $YELLOW !important;
 }

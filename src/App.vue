@@ -5,11 +5,34 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import MainMenu from './components/TheMainMenu/MainMenu.vue'
 import Button from 'primevue/button'
+import Menu from 'primevue/menu'
 
 const showFooter = ref()
 const showContent = ref()
 
 const routeName = computed(() => router.currentRoute.value.fullPath)
+
+const menu = ref()
+const items = ref([
+  {
+    items: [
+      {
+        label: 'Favourites',
+        icon: 'pi pi-heart',
+        command: () => {}
+      },
+      {
+        label: 'Shopping List',
+        icon: 'pi pi-shopping-cart',
+        command: () => {}
+      }
+    ]
+  }
+])
+
+const toggle = (event: any) => {
+  menu.value.toggle(event)
+}
 
 watch(routeName, () => {
   getPath()
@@ -30,6 +53,16 @@ const getPath = () => {
 </script>
 
 <template>
+  <div class="menu">
+    <Button
+      type="button"
+      class="pi pi-bars"
+      @click="toggle"
+      aria-haspopup="true"
+      aria-controls="overlay_menu"
+    />
+    <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
+  </div>
   <div class="main">
     <RouterView v-if="showContent" />
     <div class="error" v-else>
