@@ -17,14 +17,25 @@ const items = ref([
   {
     items: [
       {
+        label: 'My Recipes',
+        icon: 'pi pi-bookmark',
+        command: () => {
+          router.push('/my-recipes')
+        }
+      },
+      {
         label: 'Favourites',
         icon: 'pi pi-heart',
-        command: () => {}
+        command: () => {
+          router.push('/liked-recipes')
+        }
       },
       {
         label: 'Shopping List',
         icon: 'pi pi-shopping-cart',
-        command: () => {}
+        command: () => {
+          router.push('/shopping-list')
+        }
       }
     ]
   }
@@ -48,7 +59,7 @@ const goBack = () => {
 
 const getPath = () => {
   showFooter.value = routeName.value !== '/login'
-  showContent.value = app.config.globalProperties.userID !== -1 || routeName.value === '/login'
+  showContent.value = localStorage.userID !== -1 || routeName.value === '/login'
 }
 </script>
 

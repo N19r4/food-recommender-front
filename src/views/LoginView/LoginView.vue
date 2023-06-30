@@ -14,7 +14,7 @@ const password = ref()
 const updateUserID = () => {
   // check if nick and password are in database, then
   if (!(nick.value === mockedUser.nick && password.value === mockedUser.password)) return
-  app.config.globalProperties.userID = nick.value
+  localStorage.userID = nick.value
   router.push('/')
 }
 </script>

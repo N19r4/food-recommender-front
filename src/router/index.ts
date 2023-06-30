@@ -6,7 +6,10 @@ import {
   AddRecipeView,
   SearchResultView,
   EditRecipeView,
-  LoginView
+  LoginView,
+  OwnedRecipesView,
+  FavouriteRecipesView,
+  SavedIngredientsView
 } from '@/views'
 import ViewWrapper from '@/components/common/ViewWrapper.vue'
 
@@ -68,6 +71,21 @@ const router = createRouter({
           path: '/search-result',
           name: 'search result',
           component: SearchResultView
+        },
+        {
+          path: '/my-recipes',
+          name: 'my recipes',
+          component: OwnedRecipesView
+        },
+        {
+          path: '/liked-recipes',
+          name: 'liked recipes',
+          component: FavouriteRecipesView
+        },
+        {
+          path: '/shopping-list',
+          name: 'shopping list',
+          component: SavedIngredientsView
         }
       ]
     }

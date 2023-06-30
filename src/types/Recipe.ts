@@ -9,11 +9,12 @@ export interface BasicRecipe {
 }
 
 export interface ExtendedRecipe extends BasicRecipe {
-  diets: string[]
-  cuisines: string[]
-  prepTime: string
-  cookTime: string
+  diets?: string[]
+  courses?: string[]
+  cuisines?: string[]
+  prepTime?: string
+  cookTime?: string
   ingredients: string[]
   steps: string[]
-  sourceURL: string
+  sourceURL?: string
 }

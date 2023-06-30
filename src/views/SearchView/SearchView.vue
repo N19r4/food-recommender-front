@@ -5,31 +5,6 @@ import Button from 'primevue/button'
 import router from '@/router'
 
 const selectedKeywords = ref(['pizza'])
-// import { useToast } from 'primevue/usetoast'
-// import { useField, useForm } from 'vee-validate'
-
-// const { handleSubmit, resetForm } = useForm()
-// const { value, errorMessage } = useField('value', validateField)
-// const toast = useToast()
-
-// validateField = (value) => {
-//   if (!value) return 'At least one chip is required.'
-
-//   return true
-// }
-
-// const onSubmit = handleSubmit((values) => {
-//   if (values.value && values.value.length > 0) {
-//     toast.add({
-//       severity: 'info',
-//       summary: 'Form Submitted',
-//       detail: values.value.join(','),
-//       life: 3000
-//     })
-//     resetForm()
-//   }
-// })
-
 const recommendedKeywords = ref(['asian', 'ramen', 'noodles', 'eggs', 'vegetarian'])
 
 const addKeyword = (keywordName: string) => {

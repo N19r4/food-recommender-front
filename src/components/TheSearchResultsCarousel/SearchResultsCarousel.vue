@@ -1,15 +1,33 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { RecipesData } from '@/views/database'
 import { useRouter } from 'vue-router'
+import type { BasicRecipe } from '@/types/Recipe'
 
 const router = useRouter()
+const recipes = ref()
+
+const props = withDefaults(defineProps<{ recipesToShow: 'all' | 'favourite' | 'owned' }>(), {
+  recipesToShow: 'all'
+})
+
+watch(recipes, () => {
+  if (props.recipesToShow === 'favourite') {
+    recipes.value = recipes.value.filter(({ isFavourite }: BasicRecipe) => {
+      if (typeof isFavourite !== undefined) return isFavourite === true
+      else return false
+    })
+  } else if (props.recipesToShow === 'owned') {
+    recipes.value = recipes.value.filter(({ isOwned }: BasicRecipe) => {
+      if (typeof isOwned !== undefined) return isOwned === true
+      else return false
+    })
+  }
+})
 
 onMounted(() => {
   RecipesData.getProducts().then((data: any) => (recipes.value = data))
 })
-
-const recipes = ref()
 
 const goToRecipe = (recipeId: number, isOwned: boolean) => {
   router.push({
@@ -24,7 +42,7 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
   <div class="search-results-carousel__wrapper">
     <div
       class="recipe"
-      v-for="{ id, imageURL, title, tags, cuisines, isOwned } in recipes"
+      v-for="{ id, imageURL, title, tags, cuisines, isOwned, isFavourite } in recipes"
       @click="goToRecipe(id, isOwned)"
     >
       <div v-if="isOwned" class="recipe__owned-marker"></div>

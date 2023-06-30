@@ -3,12 +3,17 @@ import { useRoute } from 'vue-router'
 import { RecipesData } from '../database'
 import { onMounted, ref, watch } from 'vue'
 import Checkbox from 'primevue/checkbox'
+import Button from 'primevue/button'
 import ToggleButton from 'primevue/togglebutton'
 
 const route = useRoute()
 const recipe = ref()
-const checkedIngredients = ref([])
+const checkedIngredients = ref(localStorage.ingredients.split(','))
 const isLiked = ref(false)
+
+watch(checkedIngredients, (newVal) => {
+  localStorage.ingredients = newVal
+})
 
 onMounted(() => {
   recipe.value = RecipesData.getProductsData().find(
@@ -16,6 +21,10 @@ onMounted(() => {
   )
   if (typeof recipe.value.isFavourite !== undefined) isLiked.value = recipe.value.isFavourite
 })
+
+const goToSource = (url: string) => {
+  window.location.href = url
+}
 </script>
 
 <template>
@@ -63,6 +72,15 @@ onMounted(() => {
           <span class="recipe__steps-section__title">Steps</span>
           <span v-for="(step, index) in recipe.steps">{{ `${index + 1}. ${step}` }}</span>
         </div>
+        <Button
+          @click="goToSource(recipe.sourceURL)"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          label="Go to source"
+          rounded
+          aria-label="Go to source"
+          class="search-button"
+        />
       </div>
     </div>
   </div>
@@ -81,6 +99,9 @@ onMounted(() => {
   }
 
   &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     border-radius: 3rem 3rem 0 0;
     transform: translateY(-2rem);

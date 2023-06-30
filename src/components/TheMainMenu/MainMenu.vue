@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { computed, ref, watch, type Ref } from 'vue'
 import Dock from 'primevue/dock'
+import Dialog from 'primevue/dialog'
+import Button from 'primevue/button'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
 const route = useRoute()
+
+const modalVisible = ref()
+const modalText = ref()
+const modalConfirmed = ref()
 
 type label =
   | 'Go Back'
@@ -60,6 +66,18 @@ const menuConfigurations: menuConf[] = [
   {
     path: '/search-result',
     buttons: ['Home', 'Add Recipe', 'Search']
+  },
+  {
+    path: '/my-recipes',
+    buttons: ['Home', 'Add Recipe']
+  },
+  {
+    path: '/liked-recipes',
+    buttons: ['Home', 'Add Recipe']
+  },
+  {
+    path: '/shopping-list',
+    buttons: ['Home']
   }
 ]
 
@@ -143,7 +161,8 @@ const items: Ref<item[]> = ref([
     label: 'Delete Recipe',
     icon: 'src/assets/delete.svg',
     command: () => {
-      alert('Recipe deleted.')
+      modalVisible.value = true
+      modalText.value = 'Are you sure you want to delete this recipe?'
       router.push('/')
     }
   },
@@ -151,6 +170,8 @@ const items: Ref<item[]> = ref([
     label: 'Discard Changes',
     icon: 'src/assets/undo.svg',
     command: () => {
+      modalVisible.value = true
+      modalText.value = 'Are you sure you want to discard changes?'
       router.push({
         path: '/owned-recipe',
         query: {
@@ -194,6 +215,21 @@ const checkIfIncludes = (label: any) => {
         </template>
       </Dock>
     </div>
+    <Dialog
+      v-model:visible="modalVisible"
+      modal
+      :closable="false"
+      header="Header"
+      :style="{ width: '95vw' }"
+    >
+      <p>
+        {{ modalText }}
+      </p>
+      <template #footer>
+        <Button icon="pi pi-times" @click="modalVisible = false" />
+        <Button icon="pi pi-check" @click=";[(modalVisible = false), (modalConfirmed = true)]" />
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -256,5 +292,8 @@ const checkIfIncludes = (label: any) => {
   li[aria-label='Delete Recipe'] {
     background-color: #c11818 !important;
   }
+}
+.p-dialog-footer button {
+  width: 3rem !important;
 }
 </style>
