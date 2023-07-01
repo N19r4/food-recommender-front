@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import RecipeForm from '@/components/TheRecipeForm/RecipeForm.vue'
+import { ref, watch } from 'vue'
+
+const isSaveRecipeButtonClicked = ref()
+
+watch(isSaveRecipeButtonClicked, () => {
+  console.log('hi')
+})
 </script>
 
 <template>
   <div>
-    <RecipeForm pageTitle="Add new recipe" />
+    <RecipeForm
+      @save-recipe-button-clicked="isSaveRecipeButtonClicked = true"
+      pageTitle="Add new recipe"
+    />
   </div>
 </template>
 

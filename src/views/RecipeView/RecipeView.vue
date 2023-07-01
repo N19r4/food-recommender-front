@@ -22,7 +22,8 @@ onMounted(() => {
   recipe.value = RecipesData.getProductsData().find(
     ({ id }) => id == (route.query.id as unknown as number)
   )
-  if (typeof recipe.value.isFavourite !== undefined) isLiked.value = recipe.value.isFavourite
+  if (!recipe.value.isFavourite) return
+  isLiked.value = recipe.value.isFavourite
 })
 
 const goToSource = (url: string) => {

@@ -9,6 +9,7 @@ import Menu from 'primevue/menu'
 
 const showFooter = ref()
 const showContent = ref()
+const isSaveRecipeButtonClicked = ref()
 
 const routeName = computed(() => router.currentRoute.value.fullPath)
 
@@ -49,6 +50,10 @@ watch(routeName, () => {
   getPath()
 })
 
+watch(isSaveRecipeButtonClicked, () => {
+  console.log('hello')
+})
+
 onMounted(() => {
   getPath()
 })
@@ -76,6 +81,7 @@ const getPath = () => {
   </div>
   <div class="main">
     <RouterView v-if="showContent" />
+
     <div class="error" v-else>
       <h2>You are not logged in!</h2>
       <h3>Go back!</h3>
@@ -89,7 +95,7 @@ const getPath = () => {
     </div>
   </div>
   <div class="footer" v-if="showFooter && showContent">
-    <MainMenu />
+    <MainMenu @save-recipe-button-clicked="isSaveRecipeButtonClicked = true" />
   </div>
 </template>
 

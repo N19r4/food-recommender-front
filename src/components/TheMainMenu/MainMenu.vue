@@ -4,6 +4,9 @@ import Dock from 'primevue/dock'
 import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
 import { useRoute, useRouter } from 'vue-router'
+import { useSaveRecipeStore } from '@/stores/saveRecipe'
+
+const saveRecipeStore = useSaveRecipeStore()
 
 const router = useRouter()
 const route = useRoute()
@@ -123,26 +126,14 @@ const items: Ref<item[]> = ref([
     label: 'Save Added Recipe',
     icon: 'src/assets/bookmark-tick.svg',
     command: () => {
-      // new id should be taken from database
-      router.push({
-        path: '/owned-recipe',
-        query: {
-          id: Math.floor(Math.random() * 100)
-        }
-      })
+      saveRecipeStore.setIsFormSubmitted(true)
     }
   },
   {
     label: 'Save Edited Recipe',
     icon: 'src/assets/bookmark-tick.svg',
     command: () => {
-      alert('Recipe saved.')
-      router.push({
-        path: '/owned-recipe',
-        query: {
-          id: route.query.id
-        }
-      })
+      saveRecipeStore.setIsFormSubmitted(true)
     }
   },
   {
