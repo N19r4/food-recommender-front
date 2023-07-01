@@ -95,6 +95,14 @@ h2 {
     border: none !important;
   }
 }
+.p-sidebar {
+  height: 30rem !important;
+  border-radius: 2rem 2rem 0 0;
+}
+.p-radiobutton-box.p-highlight {
+  border-color: $YELLOW !important;
+  background: $YELLOW !important;
+}
 .p-inputwrapper-focus {
   box-shadow: none !important;
 }
