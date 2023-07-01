@@ -1,19 +1,27 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import Checkbox from 'primevue/checkbox'
 
-const checkedIngredients = ref(localStorage.ingredients.split(','))
+const checkedIngredients = ref()
 const ingredients = ref(localStorage.ingredients.split(','))
+const isListEmpty = ref()
 
 watch(ingredients, (newVal) => {
   localStorage.ingredients = newVal
+})
+
+onMounted(() => {
+  checkedIngredients.value = localStorage.ingredients
+    .split(',')
+    .filter((ingredient: string) => ingredient !== '')
+  isListEmpty.value = checkedIngredients.value.length > 0
 })
 </script>
 
 <template>
   <div>
     <h2>Shopping list</h2>
-    <div class="ingredients-section__list">
+    <div v-if="isListEmpty" class="ingredients-section__list">
       <div v-for="(value, index) in checkedIngredients" :key="index">
         <Checkbox
           v-model="ingredients"
@@ -23,6 +31,9 @@ watch(ingredients, (newVal) => {
         />
         <label :for="`ingredient-${index}`"> {{ value }} </label>
       </div>
+    </div>
+    <div v-else>
+      <p>Nothing here for now 😉</p>
     </div>
   </div>
 </template>

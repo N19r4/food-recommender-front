@@ -8,7 +8,7 @@ import ToggleButton from 'primevue/togglebutton'
 
 const route = useRoute()
 const recipe = ref()
-const checkedIngredients = ref(localStorage.ingredients.split(','))
+const checkedIngredients = ref()
 const isLiked = ref(false)
 
 watch(checkedIngredients, (newVal) => {
@@ -16,6 +16,9 @@ watch(checkedIngredients, (newVal) => {
 })
 
 onMounted(() => {
+  checkedIngredients.value = localStorage.ingredients
+    .split(',')
+    .filter((ingredient: string) => ingredient !== '')
   recipe.value = RecipesData.getProductsData().find(
     ({ id }) => id == (route.query.id as unknown as number)
   )

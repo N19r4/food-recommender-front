@@ -6,6 +6,7 @@ import type { BasicRecipe } from '@/types/Recipe'
 
 const router = useRouter()
 const recipes = ref()
+const isListEmpty = ref()
 
 const props = withDefaults(defineProps<{ recipesToShow: 'all' | 'favourite' | 'owned' }>(), {
   recipesToShow: 'all'
@@ -23,6 +24,7 @@ watch(recipes, () => {
       else return false
     })
   }
+  isListEmpty.value = recipes.value.length
 })
 
 onMounted(() => {
@@ -39,26 +41,31 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
 }
 </script>
 <template>
-  <div class="search-results-carousel__wrapper">
-    <div
-      class="recipe"
-      v-for="{ id, imageURL, title, tags, cuisines, isOwned, isFavourite } in recipes"
-      @click="goToRecipe(id, isOwned)"
-    >
-      <div v-if="isOwned" class="recipe__owned-marker"></div>
-      <div class="recipe__image" :style="`background-image: url(${imageURL});`">
-        <div class="recipe__image__overlay">
-          <span class="recipe__title">{{ title }}</span>
-          <div class="recipe__tags">
-            <div class="recipe__tags__tags">
-              <span v-for="tag in tags">#{{ tag }} </span>
-            </div>
-            <div class="recipe__tags__cuisines">
-              <span v-for="cuisine in cuisines">#{{ cuisine }} </span>
+  <div>
+    <div v-if="isListEmpty" class="search-results-carousel__wrapper">
+      <div
+        class="recipe"
+        v-for="{ id, imageURL, title, tags, cuisines, isOwned, isFavourite } in recipes"
+        @click="goToRecipe(id, isOwned)"
+      >
+        <div v-if="isOwned" class="recipe__owned-marker"></div>
+        <div class="recipe__image" :style="`background-image: url(${imageURL});`">
+          <div class="recipe__image__overlay">
+            <span class="recipe__title">{{ title }}</span>
+            <div class="recipe__tags">
+              <div class="recipe__tags__tags">
+                <span v-for="tag in tags">#{{ tag }} </span>
+              </div>
+              <div class="recipe__tags__cuisines">
+                <span v-for="cuisine in cuisines">#{{ cuisine }} </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div v-else>
+      <p>Nothing here for now 😉</p>
     </div>
   </div>
 </template>

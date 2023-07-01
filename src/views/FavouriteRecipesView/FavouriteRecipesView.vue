@@ -4,7 +4,7 @@ import SearchResultCarousel from '@/components/TheSearchResultsCarousel/SearchRe
 
 <template>
   <div>
-    <h2>Liked recipes</h2>
+    <h2>Favourites</h2>
     <SearchResultCarousel :recipes-to-show="'favourite'" />
   </div>
 </template>
