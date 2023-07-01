@@ -46,7 +46,7 @@ onMounted(() => {
     <h2>{{ props.title }}</h2>
     <div class="form__container">
       <span class="p-float-label">
-        <InputText id="username" v-model="title" />
+        <InputText id="username" v-model="props.title" />
         <label for="username">Recipe title</label>
       </span>
       <span class="p-float-label">
