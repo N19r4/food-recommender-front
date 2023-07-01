@@ -4,7 +4,7 @@ import RecipeForm from '@/components/TheRecipeForm/RecipeForm.vue'
 
 <template>
   <div>
-    <RecipeForm title="Add new recipe" />
+    <RecipeForm pageTitle="Add new recipe" />
   </div>
 </template>
 

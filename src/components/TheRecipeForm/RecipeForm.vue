@@ -14,7 +14,7 @@ const stepsValues = ref(['Add more steps!'])
 const enteredStep = ref('')
 const enteredPrepTime = ref(0)
 
-const props = withDefaults(defineProps<{ title: string }>(), { title: 'Title' })
+const props = withDefaults(defineProps<{ pageTitle: string }>(), { pageTitle: 'Title' })
 
 const addStep = () => {
   stepsValues.value.push(enteredStep.value)
@@ -43,10 +43,10 @@ onMounted(() => {
 
 <template>
   <div>
-    <h2>{{ props.title }}</h2>
+    <h2>{{ props.pageTitle }}</h2>
     <div class="form__container">
       <span class="p-float-label">
-        <InputText id="username" v-model="props.title" />
+        <InputText id="username" v-model="title" />
         <label for="username">Recipe title</label>
       </span>
       <span class="p-float-label">
