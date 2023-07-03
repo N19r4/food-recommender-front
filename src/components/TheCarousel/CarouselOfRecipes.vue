@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { RecipesData } from '@/views/database'
 import router from '@/router'
 
-onMounted(() => {
-  RecipesData.getProducts().then((data: any) => (recipes.value = data))
-})
-
 const recipes = ref()
+
+const props = defineProps<{ items?: any[] }>()
+
+onMounted(() => {
+  recipes.value = props.items
+})
 
 const goToRecipe = (recipeId: number, isOwned: boolean) => {
   router.push({

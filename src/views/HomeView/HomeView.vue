@@ -1,15 +1,26 @@
 <script setup lang="ts">
 import CarouselOfRecipes from '@/components/TheCarousel/CarouselOfRecipes.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Divider from 'primevue/divider'
+import { RecipesData } from '../database'
+import Loader from '@/components/common/Loader.vue'
 
-// name should be taken from api
-const userName = ref('Cukinia')
+const items = ref()
+const userName = ref()
+
+onMounted(() => {
+  setTimeout(() => {
+    RecipesData.getProducts().then((data: any) => (items.value = data))
+    // name should be taken from api
+    userName.value = 'Cukinia'
+  }, 4000)
+})
+
 const randomEmojis = ['😃', '😍', '😎', '😋', '😉', '👇']
 </script>
 
 <template>
-  <div>
+  <div v-if="items">
     <div class="headers">
       <h2>Welcome back {{ userName }}!</h2>
       <h3>
@@ -19,8 +30,9 @@ const randomEmojis = ['😃', '😍', '😎', '😋', '😉', '👇']
     </div>
 
     <Divider />
-    <CarouselOfRecipes />
+    <CarouselOfRecipes :items="items" />
   </div>
+  <Loader v-else />
 </template>
 
 <style lang="scss"></style>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, type Ref } from 'vue'
-import { RecipesData } from '@/views/database'
 import { useRouter } from 'vue-router'
 import type { BasicRecipe } from '@/types/Recipe'
 import Button from 'primevue/button'
@@ -25,9 +24,12 @@ const tags = [
   { name: 'Cuisine', values: ['american', 'asian', 'european'] }
 ]
 
-const props = withDefaults(defineProps<{ recipesToShow: 'all' | 'favourite' | 'owned' }>(), {
-  recipesToShow: 'all'
-})
+const props = withDefaults(
+  defineProps<{ items?: any[]; recipesToShow: 'all' | 'favourite' | 'owned' }>(),
+  {
+    recipesToShow: 'all'
+  }
+)
 
 watch(recipes, () => {
   if (props.recipesToShow === 'favourite') {
@@ -45,7 +47,7 @@ watch(recipes, () => {
 })
 
 onMounted(() => {
-  RecipesData.getProducts().then((data: any) => (recipes.value = data))
+  recipes.value = props.items
 })
 
 const goToRecipe = (recipeId: number, isOwned: boolean) => {
@@ -66,6 +68,18 @@ const addKeyword = (keywordName: string) => {
 const changeKeywordFocus = (e: any) => {
   e.target.classList.toggle('active')
 }
+
+watch(isFilterSidebarVisible, () => {
+  // filtering request to api
+})
+
+watch(isSortSidebarVisible, () => {
+  // sorting request to api
+})
+
+watch(sorting, () => {
+  // ascending/descending sorting request to api
+})
 </script>
 <template>
   <div>
