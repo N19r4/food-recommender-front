@@ -68,7 +68,7 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 4rem 4rem 0;
+    border-width: 0 3rem 3rem 0;
     border-color: transparent #097e2a transparent transparent;
     border-top-right-radius: 22px;
   }

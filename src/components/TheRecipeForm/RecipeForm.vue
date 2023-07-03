@@ -3,6 +3,7 @@ import InputText from 'primevue/inputtext'
 import InputNumber from 'primevue/inputnumber'
 import Chips from 'primevue/chips'
 import Button from 'primevue/button'
+import Divider from 'primevue/divider'
 import { onMounted, ref, watch } from 'vue'
 import { RecipesData } from '@/views/database'
 import { useRoute } from 'vue-router'
@@ -88,6 +89,7 @@ onMounted(() => {
 <template>
   <div>
     <h2>{{ props.pageTitle }}</h2>
+    <Divider />
     <div class="form__container">
       <span class="p-float-label">
         <InputText id="username" v-model="title" :class="title ?? `p-invalid`" />

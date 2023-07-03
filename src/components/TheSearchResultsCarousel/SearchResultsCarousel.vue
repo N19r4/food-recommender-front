@@ -100,6 +100,9 @@ const changeKeywordFocus = (e: any) => {
           @click="goToRecipe(id, isOwned)"
         >
           <div v-if="isOwned" class="recipe__owned-marker"></div>
+          <div
+            :class="`recipe__favourite-marker pi ${isFavourite ? 'pi-heart-fill' : 'pi-heart'}`"
+          />
           <div class="recipe__image" :style="`background-image: url(${imageURL});`">
             <div class="recipe__image__overlay">
               <span class="recipe__title">{{ title }}</span>
@@ -125,13 +128,17 @@ const changeKeywordFocus = (e: any) => {
             <span
               v-for="(name, index) in values"
               :key="index"
-              class="keywords__container__tag"
+              :class="[
+                `keywords__container__tag`,
+                `${selectedKeywords.includes(name) ? 'active' : ''}`
+              ]"
               @click="addKeyword(name), changeKeywordFocus($event)"
               >{{ name }}</span
             >
           </div>
         </div>
       </Sidebar>
+
       <Sidebar v-model:visible="isSortSidebarVisible" position="bottom">
         <h2>Sort by</h2>
         <Divider />
@@ -145,12 +152,6 @@ const changeKeywordFocus = (e: any) => {
             />
             <label :for="option" class="ml-2">{{ option }}</label>
           </div>
-          <Button
-            label="Apply"
-            aria-label="Close sorting"
-            @click="isSortSidebarVisible = false"
-            class="floating-button"
-          />
         </div>
       </Sidebar>
     </div>
@@ -246,9 +247,18 @@ const changeKeywordFocus = (e: any) => {
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 0 4rem 4rem 0;
+      border-width: 0 3rem 3rem 0;
       border-color: transparent #097e2a transparent transparent;
       border-top-right-radius: 22px;
+    }
+
+    &__favourite-marker {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 2rem;
+      height: 2rem;
+      color: white;
     }
 
     &__image {
