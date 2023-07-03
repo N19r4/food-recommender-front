@@ -19,6 +19,7 @@ watch(isFormValid, (newVal) => {
     router.push({
       path: '/owned-recipe',
       query: {
+        ...route.query,
         id: route.query.id ? route.query.id : Math.floor(Math.random() * 100)
       }
     })

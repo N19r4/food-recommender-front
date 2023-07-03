@@ -4,7 +4,7 @@ import Checkbox from 'primevue/checkbox'
 import Divider from 'primevue/divider'
 
 const checkedIngredients = ref()
-const ingredients = ref(localStorage.ingredients.split(','))
+const ingredients = ref(localStorage.ingredients ?? localStorage.ingredients.split(','))
 const isListEmpty = ref()
 
 watch(ingredients, (newVal) => {
@@ -12,6 +12,7 @@ watch(ingredients, (newVal) => {
 })
 
 onMounted(() => {
+  if (!localStorage.ingredients) return
   checkedIngredients.value = localStorage.ingredients
     .split(',')
     .filter((ingredient: string) => ingredient !== '')

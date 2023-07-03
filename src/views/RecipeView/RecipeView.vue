@@ -18,8 +18,8 @@ watch(checkedIngredients, (newVal) => {
 
 onMounted(() => {
   checkedIngredients.value = localStorage.ingredients
-    .split(',')
-    .filter((ingredient: string) => ingredient !== '')
+    ? localStorage.ingredients.split(',').filter((ingredient: string) => ingredient !== '')
+    : []
 
   // request for api by id, simulating for now
   setTimeout(() => {
@@ -29,7 +29,7 @@ onMounted(() => {
 
     if (!recipe.value.isFavourite) return
     isLiked.value = recipe.value.isFavourite
-  }, 2000)
+  }, 1000)
 })
 
 const goToSource = (url: string) => {

@@ -9,7 +9,7 @@ const items = ref()
 onMounted(() => {
   setTimeout(() => {
     RecipesData.getProducts().then((data: any) => (items.value = data))
-  }, 4000)
+  }, 2000)
 })
 </script>
 

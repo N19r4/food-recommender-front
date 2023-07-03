@@ -14,7 +14,8 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
   router.push({
     path: isOwned ? '/owned-recipe' : '/recipe',
     query: {
-      id: recipeId
+      id: recipeId,
+      previousPage: router.currentRoute.value.fullPath
     }
   })
 }

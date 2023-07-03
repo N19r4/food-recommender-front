@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, type Ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import type { BasicRecipe } from '@/types/Recipe'
 import Button from 'primevue/button'
 import ToggleButton from 'primevue/togglebutton'
@@ -9,6 +9,7 @@ import Divider from 'primevue/divider'
 import RadioButton from 'primevue/radiobutton'
 
 const router = useRouter()
+const route = useRoute()
 const recipes = ref()
 const isListEmpty = ref()
 const isFilterSidebarVisible = ref(false)
@@ -25,7 +26,7 @@ const tags = [
 ]
 
 const props = withDefaults(
-  defineProps<{ items?: any[]; recipesToShow: 'all' | 'favourite' | 'owned' }>(),
+  defineProps<{ items?: any[]; recipesToShow?: 'all' | 'favourite' | 'owned' }>(),
   {
     recipesToShow: 'all'
   }
@@ -54,7 +55,9 @@ const goToRecipe = (recipeId: number, isOwned: boolean) => {
   router.push({
     path: isOwned ? '/owned-recipe' : '/recipe',
     query: {
-      id: recipeId
+      ...route.query,
+      id: recipeId,
+      previousPage: router.currentRoute.value.path
     }
   })
 }

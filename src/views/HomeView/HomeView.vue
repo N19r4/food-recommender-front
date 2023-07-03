@@ -13,7 +13,7 @@ onMounted(() => {
     RecipesData.getProducts().then((data: any) => (items.value = data))
     // name should be taken from api
     userName.value = 'Cukinia'
-  }, 4000)
+  }, 2000)
 })
 
 const randomEmojis = ['😃', '😍', '😎', '😋', '😉', '👇']
